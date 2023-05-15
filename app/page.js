@@ -22,7 +22,7 @@ export default async function Home() {
   // pulled in asynchronously before page gets rendered, data loaded very quickly, no client side rendering, server side rendering
   // const products = getStripeProducts() returns a promise
   const products = await getStripeProducts()
-  console.log(products)
+  // console.log(products)
   
   return (
     <main className='p-4 flex flex-col'>

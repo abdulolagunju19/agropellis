@@ -1,27 +1,29 @@
 "use client"
 
-import { serverRuntimeConfig } from "@/next.config"
 import useCart from "../(store)/store"
+import { useEffect } from "react"
 
 export default function ProductPage(props){
     const { searchParams } = props
-    const { price_id } = props
+    const { price_id } = searchParams
     
     const product = useCart(state => state.product)
     const addItemtoCart = useCart(state => state.addItemtoCart)
-    const removeItemFromCart = useCart(state => state.removeItemFromCart)
-    const emptyCart = useCart(state => state.emptyCart)
 
     const { cost, productInfo, description, name} = product
 
     if (!product?.name) {
-        window.location.href = '/'
+        useEffect(() => {
+            window.location.href = '/'
+        }, [])
     }
 
     function handleAddToCart(){
         const newItem = {
             quantity: 1,
-            price_id: price_id
+            price_id, 
+            name,
+            cost
         }
         addItemtoCart({ newItem })
     }

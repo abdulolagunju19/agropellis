@@ -7,7 +7,7 @@ const useCart = create(
         openModal: false,
         setOpenModal: (params) => {
             set((state) => {
-                return{
+                return {
                     ...state,
                     openModal: !state.openModal
                 }
