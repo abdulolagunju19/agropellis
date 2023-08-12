@@ -1,17 +1,18 @@
-"use client"
-import React from 'react'
-import { useRouter } from 'next/navigation'
-import useCart from './(store)/store'
+"use client";
+import React from 'react';
+import { useRouter } from 'next/navigation';
+import useCart from './(store)/store';
 
 export default function ProductCard(props){
-    const { product } = props
-    const { id: price_id, unit_amount: cost, product: productInfo} = product
-    const { name, description } = productInfo
+
+    const { product } = props;
+    const { id: price_id, unit_amount: cost, product: productInfo} = product;
+    const { name, description } = productInfo;
 
     // on-click handler routes us to a new page
-    const router = useRouter()
+    const router = useRouter();
 
-    const setProduct = useCart(state => state.setProduct)
+    const setProduct = useCart(state => state.setProduct);
 
     function onProductClick (){
         const newProduct = {
@@ -21,8 +22,8 @@ export default function ProductCard(props){
             cost, 
             productInfo
         }
-        setProduct({ newProduct })
-        router.push('/product?price_id=' + price_id)
+        setProduct({ newProduct });
+        router.push('/product?price_id=' + price_id);
     }
 
     return(

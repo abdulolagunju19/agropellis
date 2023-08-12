@@ -1,7 +1,10 @@
-import { create } from 'zustand'
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware'
+
 
 const useCart = create(
-    (set, get) => ({
+    persist(
+        (set, get) => ({
         cart: [],
         product: {},
         openModal: false,
@@ -33,10 +36,10 @@ const useCart = create(
             })
         },
         removeItemFromCart: (params) => {
-            const { itemIndex } = params
+            const { price_id } = params
             set ((state) => {
-                const newCart = state.cart.filter((element, elementIndex) => {
-                    return elementIndex != itemIndex
+                const newCart = state.cart.filter((product) => {
+                    return product.price_id != price_id
                 })
                 return{
                     ...state,
@@ -53,7 +56,11 @@ const useCart = create(
                 }
             })
         }
-    })
+    }),
+    {
+        name: 'farm-storage'
+    }
+    )
 )
 
 export default useCart;

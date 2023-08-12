@@ -4,6 +4,7 @@ import ReactDom from 'react-dom'
 import { useState, useEffect } from 'react'
 
 import useCart from './(store)/store'
+import { useRouter } from 'next/navigation'
 
 export default function Modal(){
     // wait until the DOM is ready using useEffect, and then you call createPortal, fixes issue of TARGET CONTAINER IS NOT A DOM ELEMENT ERROR
@@ -11,12 +12,30 @@ export default function Modal(){
 
     const closeModal = useCart(state => state.setOpenModal)
     const cartItems = useCart(state => state.cart)
+
+    const router = useRouter()
     
     useEffect(() => {
         setDomReady(true)
     }, [])
 
-    console.log(cartItems)
+    async function checkout() {
+        const lineItems = cartItems.map(cartItem => {
+            return {
+                price: cartItem.price_id,
+                quantity: 1
+            }
+        })
+        const res = await fetch('/api/checkout/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ lineItems })
+        })
+        const data = await res.json()
+        router.push(data.session.url)
+    }
     return (
         domReady ?
         ReactDom.createPortal(
@@ -30,15 +49,20 @@ export default function Modal(){
                                 <div className='absolute bottom-0 left-1/2 -translate-x-1/2 h-[1px]
                                 bg-slate-300 w-2/3'></div>
                             </div>
-                            <div>
+                            <div className='p-4 flex-1 flex flex-col gap-4 overflow-auto'>
                                 {cartItems.length === 0 ? (
                                     <p>There is nothing in your cart.</p>
                                 ) : (
                                     <>
                                         {cartItems.map((cartItem, itemIndex) => {
                                             return(
-                                                <div key={itemIndex}>
-                                                    <p>{cartItem.name}</p>
+                                                <div key={itemIndex} className='flex border-l border-solid
+                                                border-slate-700 px-2 flex-col gap-2'>
+                                                    <div className='flex items-center justify-between'>
+                                                        <h2>{cartItem.name}</h2>
+                                                        <p>${cartItem.cost / 100}</p>
+                                                    </div>
+                                                    <p className='text-slate-600 text-sm'>Quantity: 1</p>
                                                 </div>
                                             )
                                         })
@@ -46,6 +70,7 @@ export default function Modal(){
                                     </>
                                 )}
                             </div>
+                            <div onClick={checkout} className='border border-solid border-slate-700 text-md m-2 p-4 grid place-items-center hover:opacity-60 cursor-pointer'>Checkout</div>
                         </div>
                 </div>,
                 document.getElementById('portal')
