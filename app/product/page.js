@@ -6,6 +6,8 @@ import useCart from "../(store)/store";
 import NoSSRWrapper from "../no-ssr-wrapper";
 
 export default function ProductPage(props){
+
+    //store the product on the cache to avoid refresh page error
     const [localStorageImage, setLocalStorageImage] = useState('');
     const { searchParams } = props;
     const { price_id } = searchParams;
@@ -17,6 +19,7 @@ export default function ProductPage(props){
 
     const { cost, description, name } = product;
 
+    //make sure that we can access local storage key value database called farm-storage (created in app/(store)/store.js)
     useEffect(() => {
         if (typeof window !== 'undefined' && window.localStorage) {
           setLocalStorageImage(JSON.parse(localStorage.getItem('farm-storage')).state.product.productInfo.images[0]);

@@ -1,13 +1,16 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware'
 
-
+// Define a custom hook named 'useCart' using Zustand
 const useCart = create(
+    // Applying 'persist' middleware to persist state across sessions
     persist(
         (set, get) => ({
+        // Initial state properties
         cart: [],
         product: {},
         openModal: false,
+        // Function to toggle the 'openModal' state
         setOpenModal: (params) => {
             set((state) => {
                 return {
@@ -35,6 +38,7 @@ const useCart = create(
                 }
             })
         },
+        // Function to remove an item from the 'cart' state
         removeItemFromCart: (params) => {
             const { price_id } = params
             set ((state) => {
