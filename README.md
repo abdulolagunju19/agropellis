@@ -2,7 +2,7 @@
 
 ## 💡 Motivation 
 
-I was interested in building an ecommerce site. I went with building the frontend with Chakra UI and Next.js. I also wanted to start learning about state, so I chose to integrate it with zustand. I learned a lot about persisting state with local storage, using dynamic imports to avoid server side rendering, and managing state with zustand!
+I was interested in building an ecommerce site. I went with building the frontend with Chakra UI and Next.js. I also wanted to start learning about state, so I chose to integrate it with zustand. I learned a lot about persisting state with local storage, using dynamic imports to avoid server side rendering, and managing state with zustand! Shout out to [SmolJames](https://www.youtube.com/@Smoljames/videos) for the awesome tutorial!
 
 Feel free to [reach out](https://abneuro.vercel.app/contact) to me if you have any additional questions. There are lots of features that still need to be implemented!
 
