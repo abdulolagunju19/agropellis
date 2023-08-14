@@ -1,4 +1,4 @@
-# Welcome to my Dashboard!
+# Welcome to my Ecommerce site!
 
 ## 💡 Motivation 
 
