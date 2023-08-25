@@ -22,9 +22,7 @@ I stored the products on Stripe, and managed state with Zustand.
 
 **Why Zustand?**
 
-Vercel make it really easy to deploy a website for free. In addition, I love the routing system and SEO benefits that Next.js offers. Next.js also makes it easy to work with API's!
-
-The next time I do another project, I'm definitely looking forward to using TypeScript with Next.js!
+Zustand makes it really easy to handle state for an ecommerce site. Zustand also uses a very efficient mechanism to manage state updates, and it minimizes unnecessary re-renders by providing control over which components subscribe to which parts of the state.
 
 ### API Routes
 - /api/checkout/route for posting request to Stripe
